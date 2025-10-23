@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
+import { authApi } from '../api/api';
 
 const loginFormSchema = z.object({
     email: z.string().min(2, 'Username must be at least 2 characters.'),
@@ -21,12 +22,12 @@ const loginFormSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
-interface LoginFormWidgetProps {
+interface LoginFormProps {
     onSubmit: (data: LoginFormValues) => void;
     isLoading?: boolean;
 }
 
-export const LoginForm = ({ onSubmit, isLoading }: LoginFormWidgetProps) => {
+export const LoginForm = ({ onSubmit }: LoginFormProps) => {
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -34,8 +35,11 @@ export const LoginForm = ({ onSubmit, isLoading }: LoginFormWidgetProps) => {
             password: '',
         },
     });
-    const handleFormSubmit = (data: LoginFormValues) => {
+    const handleFormSubmit = async (data: LoginFormValues) => {
         onSubmit(data);
+        // console.log(data);
+        const res = await authApi.login({ email: data.email, password: data.password })
+        console.log(res);
     }
     return (
         <Form {...form}>
