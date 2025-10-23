@@ -7,9 +7,9 @@ import {
     CardTitle,
 } from '@/shared/ui/card'
 
-import { LoginFormWidget, SocialButton } from '@/widgets'
+import { LoginForm, OAuthButton } from '@/features/auth'
 
-export default function CardDemo() {
+export default function LoginPage() {
     return <>
         <div className='flex justify-center items-center min-h-screen'>
             <Card className="w-[400px] px-[40px] py-[32px] mx-auto rounded-[3px]! border border-slate-200">
@@ -23,13 +23,16 @@ export default function CardDemo() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className='p-0!'>
-                    <LoginFormWidget onSubmit={(data) => console.log(data)} isLoading={false} />
+                    
+                    {/* Login with form method */}  
+                    <LoginForm onSubmit={(data) => console.log(data)} isLoading={false} />
+
                     <div>
                         <p className='text-center my-4 text-[14px] font-semibold  text-gray-500'>Or continue with:</p>
                     </div>
                    
                    {/* Login with social method */}
-                    <SocialButton />
+                    <OAuthButton />
 
                 </CardContent>
                 <CardFooter className='justify-center'>

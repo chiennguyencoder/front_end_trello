@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { authApi } from './api'
-import type { LoginPayload } from './api'
+import { authApi } from './api/api'
+import type { LoginPayload } from './api/api'
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false)

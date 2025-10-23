@@ -1,9 +1,9 @@
-import { LoginPage } from '@/pages/login'
+import { AppRouter } from './providers/RouterProvider'
 
 function App() {
     return (
         <>
-            <LoginPage />
+            <AppRouter />
         </>
     )
 }

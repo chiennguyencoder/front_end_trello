@@ -26,7 +26,7 @@ interface LoginFormWidgetProps {
     isLoading?: boolean;
 }
 
-export const LoginFormWidget = ({ onSubmit, isLoading }: LoginFormWidgetProps) => {
+export const LoginForm = ({ onSubmit, isLoading }: LoginFormWidgetProps) => {
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -66,7 +66,7 @@ export const LoginFormWidget = ({ onSubmit, isLoading }: LoginFormWidgetProps) =
                         </FormItem>
                     )}
                 />
-                <Button type="submit"  className='w-full bg-blue-500! rounded-[3px]! mt-2'>
+                <Button type="submit" className='w-full bg-blue-500! hover:bg-blue-700! cursor-pointer rounded-[3px]! mt-2'>
                     Continue
                 </Button>
             </form>

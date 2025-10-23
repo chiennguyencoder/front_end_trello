@@ -1,11 +1,11 @@
 import { Button } from '@/shared/ui/button'
 
-export default function SocialButton() {
+export function OAuthButton() {
     return (
         <div>
             <Button
                 variant="outline"
-                className="w-full mt-2 hover:bg-blue-600! cursor-pointer rounded-[3px]!"
+                className="w-full mt-2 hover:bg-grey-200! cursor-pointer rounded-[3px]!"
             >
                 <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png"
@@ -16,7 +16,7 @@ export default function SocialButton() {
             </Button>
             <Button
                 variant="outline"
-                className="w-full mt-2 hover:bg-blue-600! cursor-pointer rounded-[3px]!"
+                className="w-full mt-2 hover:bg-grey-200! cursor-pointer rounded-[3px]!"
             >
                 <img
                     src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
