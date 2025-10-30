@@ -12,6 +12,5 @@ export const routes = [
         path: "/dashboard",
         loader: useAuth,
         element: <DashboardPage />
-        
     }
 ]
