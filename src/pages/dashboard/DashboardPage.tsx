@@ -2,7 +2,15 @@ import instance from '@/shared/api/axios'
 import { Button } from '@/shared/ui/button'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/popover'
+
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/shared/ui/dialog'
 
 export default function DashboardPage() {
     const [user, setUser] = useState<any>(null)
@@ -10,8 +18,8 @@ export default function DashboardPage() {
         const fetchUser = async () => {
             try {
                 const response = await instance.get('/auth/me')
-                console.log('user', response)
-                setUser(response.data)
+                console.log(response.data.user)
+                setUser(response.data.user)
             } catch (error) {
                 console.error('Failed to fetch user', error)
             }
@@ -21,22 +29,25 @@ export default function DashboardPage() {
 
     return (
         <div className="flex justify-center items-center min-h-screen">
-            <Popover>
-                <PopoverTrigger asChild>
-                    <Button onClick={() => console.log(user)}>
-                        Click Me to get User
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Button>Open Dashboard</Button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Fetch user info</DialogTitle>
+                    </DialogHeader>
+                    <DialogDescription>
+                        This dialog displays the authenticated user's
+                        information.
+                    </DialogDescription>
                     <div>
-                        {user ? (
-                            <pre>{JSON.stringify(user, null, 2)}</pre>
-                        ) : (
-                            <p>No user data available</p>
-                        )}
+                        <p>ID: {user?.id}</p>
+                        <p>Name: {user?.username}</p>
+                        <p>Email: {user?.email}</p>
                     </div>
-                </PopoverContent>
-            </Popover>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
