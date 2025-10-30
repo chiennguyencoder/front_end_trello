@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as localStorage from '@/shared/lib/local-storage'
 
 const instance = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
@@ -23,17 +24,31 @@ instance.interceptors.request.use((config) => {
 })
 
 instance.interceptors.response.use(
-    (response) => {
-        if (response.data) {
-            return response.data
-        } else {
-            return Promise.reject({
-                message: response.data?.message || 'Unknown error occurred',
-                status: response.status || 500,
-            })
+    (response) => response.data,
+    async (error) => {
+        const req = error?.config
+        if (error.response.status === 401 && !req.flag) {
+            req.flag = true
+            try {
+
+                const { data } = await axios.post(
+                    `${instance.defaults.baseURL}/auth/refresh-token`,{},
+                    { withCredentials: true }
+                )
+
+                console.log(data)
+
+                const accessToken = data.data.accessToken
+                if (accessToken) {
+                    localStorage.setItem('accessToken', accessToken)
+                    req.headers.Authorization = `Bearer ${accessToken}`
+                }
+                return instance(req)
+            } catch (e) {
+                localStorage.removeItem('accessToken')
+                return Promise.reject(e)
+            }
         }
-    },
-    (error) => {
         return Promise.reject(error)
     }
 )

@@ -13,7 +13,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
-import { authApi } from '../api/api';
+import { authApi } from '../api/auth-api';
+import { setItem } from '@/shared/lib/local-storage';
+import { redirect } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const loginFormSchema = z.object({
     email: z.string().min(2, 'Username must be at least 2 characters.'),
@@ -28,6 +31,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ onSubmit }: LoginFormProps) => {
+    const navigate = useNavigate();
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -37,9 +41,9 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
     });
     const handleFormSubmit = async (data: LoginFormValues) => {
         onSubmit(data);
-        // console.log(data);
         const res = await authApi.login({ email: data.email, password: data.password })
-        console.log(res);
+        setItem('accessToken', res.data.accessToken)
+        navigate('/dashboard');
     }
     return (
         <Form {...form}>
