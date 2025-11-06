@@ -1,16 +1,24 @@
-import DashboardPage from "@/pages/dashboard/DashboardPage";
-import { LoginPage } from "@/pages/login";
+import LoginPage from "@/pages/LoginPage";
 import { useAuth } from "@/shared/lib/useAuth";
+import { AppLayout } from "@/features/app/ui/AppLayout";
+import  DashboardPage from "@/pages/DashboardPage";
 
 export const routes = [
     {
         path: "/login",
-        element: <LoginPage />
+        Component: LoginPage
     },
     
     {
-        path: "/dashboard",
-        loader: useAuth,
-        element: <DashboardPage />
+        path: "/",
+        // loader: useAuth,
+        Component: AppLayout,
+        children: [
+            {
+                index : true,
+                Component: DashboardPage
+            },
+           
+        ]
     }
 ]
