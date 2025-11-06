@@ -10,7 +10,7 @@ import AppSideBar from '@/features/Sidebar/Sidebar'
 // import { useBoardStore } from '@/shared/stores/useBoardStore'
 // import { use, useState } from 'react'
 
-export const AppLayout = () => {
+const AppLayout = () => {
 
     // const { boards, workspaces} = useBoardStore()
     // const [ selectedWorkspace, setSelectedWorkspace ] = useState("")
@@ -27,3 +27,5 @@ export const AppLayout = () => {
         </SidebarProvider>
     )
 }
+
+export default AppLayout
