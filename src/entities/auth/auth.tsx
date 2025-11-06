@@ -14,3 +14,9 @@ export type RegisterPayload = {
     password: string
     username: string
 }
+
+export type User = {
+    id: string
+    email: string
+    username: string
+}

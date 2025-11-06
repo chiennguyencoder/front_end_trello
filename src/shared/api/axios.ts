@@ -36,8 +36,6 @@ instance.interceptors.response.use(
                     { withCredentials: true }
                 )
 
-                console.log(data)
-
                 const accessToken = data.data.accessToken
                 if (accessToken) {
                     localStorage.setItem('accessToken', accessToken)
