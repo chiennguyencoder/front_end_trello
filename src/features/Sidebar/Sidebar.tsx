@@ -8,7 +8,7 @@ import { Layout } from 'lucide-react'
 
 import { WorkspaceSwitcher } from './WorkspaceSwitcher'
 import { useBoardStore } from '@/shared/stores/useBoardStore'
-import { NavMain } from './Nav-menu'
+import { NavMain } from './nav-menu'
 import { NavBoards } from './nav-board'
 import { NavUser } from './nav-user'
 export default function AppSideBar({
