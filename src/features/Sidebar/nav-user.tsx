@@ -85,7 +85,7 @@ export function NavUser({ user }: NavUserProps) {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to="/auth/login" className="text-red-600">
+              <Link to="/login" className="text-red-600">
                 <LogOut className="w-4 h-4 mr-2" />
                 Log out
               </Link>
